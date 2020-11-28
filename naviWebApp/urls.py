@@ -42,7 +42,8 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view
             (template_name='users/password_reset_complete.html'),
             name='password_reset_complete'),
-    path('blog/', include('blog.urls'))
+    path('blog/', include('blog.urls')),
+    path('financial/', include('financial.urls'))
 ]
 
 if settings.DEBUG:

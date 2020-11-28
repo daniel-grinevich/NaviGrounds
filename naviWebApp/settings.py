@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-import json 
+import json
 
-with open('/etc/config.json') as config_file: 
+with open('/etc/config.json') as config_file:
    config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,14 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['104.200.30.246']
+ALLOWED_HOSTS = ['104.200.30.246', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
