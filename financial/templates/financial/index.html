@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<br>
+
+<h1>Financials Home</h1>
+<h6>You must be logged in to access contributions</h6>
+<a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'contrib_home' %}" role="button">Contribution page</a>
+{% endblock content %}
