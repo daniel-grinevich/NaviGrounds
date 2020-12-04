@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['104.200.30.246', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_modal_forms',
     'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
@@ -87,8 +88,8 @@ DATABASES = {
         'NAME': 'navidb',
         'USER': 'dgrinevi',
         'PASSWORD': 'DanilkaBlubber98!',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '104.200.30.246',
+        'PORT': '5432',
     }
 }
 
