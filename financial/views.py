@@ -45,7 +45,7 @@ class DeleteView(SuccessMessageMixin, DeleteView):
     def delete(self,request, *args, **kwargs):
         messages.success(
             self.request,
-            f'successfully deleted payment'
+            f'Successfully deleted payment'
         )
         self.object = self.get_object()
         super(DeleteView, self).delete(request, *args, **kwargs)
