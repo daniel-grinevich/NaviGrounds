@@ -1,14 +1,20 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<br><br>
+<br>
 <h1>Payments</h1>
 <h6>Functions</h6>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
-  <button type="button" class="btn btn-primary">Search</button>
-  <button type="button" class="btn btn-secondary">Queries</button>
-</div>
+<div class="row">
+    <div class="col-8">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+          <button type="button" class="btn btn-primary">Search</button>
+          <button type="button" class="btn btn-secondary">Queries</button>
+        </div>
+    </div>
+    <div class="col-4">
+    </div>
+ </div>
 <br>
 <br>
 <table class="table table-hover table-dark">
@@ -17,7 +23,7 @@
       <!--<th scope="col">#</th>-->
       <th scope="col">Hex</th>
       <th scope="col">Username</th>
-      <th scope="col">Email</th>
+      <th scope="col">DateTimeField</th>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
       <th scope="col">Type</th>
@@ -33,46 +39,42 @@
       <!--<th scope="row">{{ forloop.counter }}</th>-->
       <th scope="row">{{ payment.id }}</th>
       <td>{{ payment.author }}</td>
-      <td>{{ payment.author.email }}</td>
+      <td>{{ payment.time_posted }}</td>
       <td>{{ payment.author.first_name }}</td>
       <td>{{ payment.author.last_name }}</td>
       <td>TYPE</td>
       <td>${{ payment.amount }}</td>
       <td><a class="btn btn-secondary">View</a></td>
       <td><a class="btn btn-primary">Edit</a></td>
-      <td><a class="btn btn-danger">Delete</a></td>
+      <td>
+          <form action="{% url 'delete-view' pk=payment.pk %}" method="POST">
+              {% csrf_token %}
+              <input class="btn btn-danger" type="submit" value="Delete"/>
+          </form>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-{% endblock content %}
 
-<!--
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a contribution!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST">
-          <div class="modal-body">
-              <div class="content-section container">
-                   {% csrf_token %}
-                  <fieldset="form-group">
-                    <legend class="boarder-bottom mb-4">New contribution</legend>
-                    {{ form|crispy }}
-                </fieldset>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>
-</div>
--->
+{% endblock content %}
