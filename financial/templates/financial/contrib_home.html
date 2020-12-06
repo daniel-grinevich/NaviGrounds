@@ -1,54 +1,64 @@
 {% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>Contributions</h1>
+<br>
+<h1>Payments</h1>
 <h6>Functions</h6>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Entry</button>
-  <button type="button" class="btn btn-primary">Search</button>
-  <button type="button" class="btn btn-secondary">Not sure</button>
-</div>
+<div class="row">
+    <div class="col-8">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+          <button type="button" class="btn btn-primary">Search</button>
+          <button type="button" class="btn btn-secondary">Queries</button>
+        </div>
+    </div>
+    <div class="col-4">
+    </div>
+ </div>
 <br>
 <br>
 <table class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <!--<th scope="col">#</th>-->
+      <th scope="col">Hex</th>
       <th scope="col">Username</th>
-      <th scope="col">Email</th>
-      <th scope="col">Contribution</th>
+      <th scope="col">DateTimeField</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+    {% for payment in payments %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>$400</td>
-      <td>btn</td>
+      <!--<th scope="row">{{ forloop.counter }}</th>-->
+      <th scope="row">{{ payment.id }}</th>
+      <td>{{ payment.author }}</td>
+      <td>{{ payment.time_posted }}</td>
+      <td>{{ payment.author.first_name }}</td>
+      <td>{{ payment.author.last_name }}</td>
+      <td>TYPE</td>
+      <td>${{ payment.amount }}</td>
+      <td><a class="btn btn-secondary">View</a></td>
+      <td><a class="btn btn-primary">Edit</a></td>
+      <td>
+          <form action="{% url 'delete-view' pk=payment.pk %}" method="POST">
+              {% csrf_token %}
+              <input class="btn btn-danger" type="submit" value="Delete"/>
+          </form>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>$400</td>
-      <td>btn</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>$400</td>
-      <td>btn</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 
 
-
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -58,14 +68,11 @@
         </button>
       </div>
       <div class="modal-body">
-          <form method="POST">
-              {% csrf_token %}
-              <h1>Needs work . . . </h1>
-          </form>
+        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

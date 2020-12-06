@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['104.200.30.246', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_modal_forms',
     'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
@@ -83,11 +84,14 @@ WSGI_APPLICATION = 'naviWebApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'navidb',
+        'USER': 'dgrinevi',
+        'PASSWORD': 'DanilkaBlubber98!',
+        'HOST': '104.200.30.246',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
