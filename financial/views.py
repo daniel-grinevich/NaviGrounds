@@ -14,11 +14,13 @@ from django.views.generic import (
 )
 from .models import Payment
 
+
 # Create your views here
 def index(request):
     return render(request, 'financial/index.html')
 
 class PaymentListView(LoginRequiredMixin, ListView):
+
     model = Payment
     template_name = 'financial/contrib_home.html'
     context_object_name = 'payments'

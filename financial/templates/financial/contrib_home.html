@@ -7,9 +7,22 @@
 <div class="row">
     <div class="col-8">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
-          <button type="button" class="btn btn-primary">Search</button>
-          <button type="button" class="btn btn-secondary">Queries</button>
+            <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+            <button type="button" class="btn btn-primary">Search</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Queries
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Date (Oldest)</a>
+                    <a class="dropdown-item" href="#">Date (Earliest)</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Amount (Greatest)</a>
+                    <a class="dropdown-item" href="#">Amount (Smallest)</a>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-4">
