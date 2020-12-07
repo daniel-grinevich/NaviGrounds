@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['104.200.30.246', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_filters',
     'bootstrap_modal_forms',
     'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',

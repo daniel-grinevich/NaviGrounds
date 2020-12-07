@@ -13,6 +13,7 @@ from django.views.generic import (
         DeleteView
 )
 from .models import Payment
+from .filters import PaymentFilter
 
 
 # Create your views here
@@ -24,6 +25,11 @@ class PaymentListView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'financial/contrib_home.html'
     context_object_name = 'payments'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PaymentFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
