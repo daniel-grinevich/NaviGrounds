@@ -25,6 +25,7 @@ class PaymentListView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'financial/contrib_home.html'
     context_object_name = 'payments'
+    ordering = ['-time_posted']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

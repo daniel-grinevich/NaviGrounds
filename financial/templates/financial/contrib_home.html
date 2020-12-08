@@ -21,6 +21,9 @@
         <a class="dropdown-item" href="#">Amount (Greatest)</a>
         <a class="dropdown-item" href="#">Amount (Smallest)</a>
         <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Contribution</a>
+        <a class="dropdown-item" href="#">Expense</a>
+        <div class="dropdown-divider"></div>
     </div>
 </div>
 <br><br>
@@ -28,17 +31,17 @@
   <thead>
     <tr>
       <!--<th scope="col">#</th>-->
-      <th scope="col">Hex</th>
+      <th scope="col">Hex UUIDField</th>
       <th scope="col">Username</th>
       <th scope="col">DateTimeField</th>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
-      <th scope="col">Type</th>
       <th scope="col">Amount</th>
+      <th scope="col">Type</th>
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-          Search
+          Filter
       </button></th>
     </tr>
   </thead>
@@ -48,11 +51,11 @@
       <!--<th scope="row">{{ forloop.counter }}</th>-->
       <th scope="row">{{ payment.id }}</th>
       <td>{{ payment.author }}</td>
-      <td>{{ payment.time_posted }}</td>
+      <td>{{ payment.time_posted | date:"M d Y" }}</td>
       <td>{{ payment.author.first_name }}</td>
       <td>{{ payment.author.last_name }}</td>
-      <td>TYPE</td>
       <td>${{ payment.amount }}</td>
+      <td>TYPE</td>
       <td><button type="button" class="btn btn-light">View</button></td>
       <td><button type="button" class="btn btn-light">Edit</button></td>
       <td>
