@@ -4,35 +4,26 @@
 <br>
 <div class="row">
     <div class="col-4">
-        <h1>Payments</h1>
-        <h6>Functions</h6>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Queries
-                </button>
-                <div class="dropdown-menu">
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Date (Oldest)</a>
-                    <a class="dropdown-item" href="#">Date (Earliest)</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Amount (Greatest)</a>
-                    <a class="dropdown-item" href="#">Amount (Smallest)</a>
-                    <div class="dropdown-divider"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-3">
-        <form method="GET">
-            {{ filter.form|crispy }}
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+        <h1>Payments Table</h1>
+        <div class="dropdown-divider"></div>
     </div>
  </div>
-<br>
-<br>
+<a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+<div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Queries
+    </button>
+    <div class="dropdown-menu">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Date (Oldest)</a>
+        <a class="dropdown-item" href="#">Date (Earliest)</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Amount (Greatest)</a>
+        <a class="dropdown-item" href="#">Amount (Smallest)</a>
+        <div class="dropdown-divider"></div>
+    </div>
+</div>
+<br><br>
 <table class="table table-hover table-dark">
   <thead>
     <tr>
@@ -46,7 +37,9 @@
       <th scope="col">Amount</th>
       <th scope="col"></th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+          Search
+      </button></th>
     </tr>
   </thead>
   <tbody>
@@ -60,8 +53,8 @@
       <td>{{ payment.author.last_name }}</td>
       <td>TYPE</td>
       <td>${{ payment.amount }}</td>
-      <td><a class="btn btn-secondary">View</a></td>
-      <td><a class="btn btn-primary">Edit</a></td>
+      <td><button type="button" class="btn btn-light">View</button></td>
+      <td><button type="button" class="btn btn-light">Edit</button></td>
       <td>
           <form action="{% url 'delete-view' pk=payment.pk %}" method="POST">
               {% csrf_token %}
@@ -78,18 +71,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Search Payment table</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="GET">
       <div class="modal-body">
-        ...
+              {{ filter.form|crispy }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

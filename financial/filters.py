@@ -8,6 +8,7 @@ class PaymentFilter(django_filters.FilterSet):
     class Meta:
         model = Payment
         fields = {
+            'id': ['icontains'],
             'time_posted': ['contains'],
             'author__username': ['contains']
         }
