@@ -55,9 +55,17 @@
       <td>{{ payment.author.first_name }}</td>
       <td>{{ payment.author.last_name }}</td>
       <td>${{ payment.amount }}</td>
-      <td>TYPE</td>
-      <td><button type="button" class="btn btn-light">View</button></td>
-      <td><button type="button" class="btn btn-light">Edit</button></td>
+      <td>{{ payment.type.all|join:"" }}</td>
+      <td>
+          <a class="btn btn-light" href="{% url 'payment-detail' pk=payment.pk %}">
+              View
+          </a>
+      </td>
+      <td>
+          <a href="/">
+              <button type="button" class="btn btn-light">Edit</button>
+          </a>
+      </td>
       <td>
           <form action="{% url 'delete-view' pk=payment.pk %}" method="POST">
               {% csrf_token %}

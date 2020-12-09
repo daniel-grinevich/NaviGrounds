@@ -24,7 +24,8 @@ class PaymentFilter(django_filters.FilterSet):
         fields = {
             'id': ['icontains'],
             'author__username': ['icontains'],
-            'author__first_name': ['icontains']
+            'author__first_name': ['icontains'],
+            'type__name': ['icontains']
         }
 
     def filter_by_order(self, queryset, time_posted, value):

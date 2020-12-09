@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<br>
+<h1>Detail Payment View</h1>
+<br>
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Hex UUIDField</th>
+      <th scope="col">Username</th>
+      <th scope="col">DateTimeField</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Type</th>
+      <th scope="col"></th>
+      <th>
+          <a type="btn" class="btn btn-info" href="{% url 'contrib-home' %}">Go back<a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ object.id }}</th>
+      <td>{{ object.author }}</td>
+      <td>{{ object.time_posted | date:"M d Y" }}</td>
+      <td>{{ object.author.first_name }}</td>
+      <td>{{ object.author.last_name }}</td>
+      <td>${{ object.amount }}</td>
+      <td>{{ object.type.all|join:"" }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}

@@ -10,9 +10,10 @@ from django.contrib.auth.models import User
 from django.views.generic import (
         ListView,
         CreateView,
-        DeleteView
+        DeleteView,
+        DetailView
 )
-from .models import Payment
+from .models import Payment, Category
 from .filters import PaymentFilter
 
 
@@ -35,7 +36,7 @@ class PaymentListView(LoginRequiredMixin, ListView):
 
 class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Payment
-    fields = ['amount']
+    fields = ['amount','type']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -61,3 +62,11 @@ class DeleteView(SuccessMessageMixin, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
         #form = PaymentCreateForm()
         #return render(request, 'financial/payment_form.html', {'form': form})
+
+class PaymentDetailView(DetailView):
+    model = Payment
+    #template_name = 'financial/contrib_home/payment_detail.html'
+    #context_object_name = 'Payment'
+
+    #def get_object(self):
+        #return Payment.objects.get(pk=self.kwargs['pk'])
