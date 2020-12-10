@@ -7,24 +7,28 @@
         <h1>Payments Table</h1>
         <div class="dropdown-divider"></div>
     </div>
- </div>
-<a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+</div>
 <div class="btn-group">
-    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Queries
-    </button>
-    <div class="dropdown-menu">
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Date (Oldest)</a>
-        <a class="dropdown-item" href="#">Date (Earliest)</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Amount (Greatest)</a>
-        <a class="dropdown-item" href="#">Amount (Smallest)</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Contribution</a>
-        <a class="dropdown-item" href="#">Expense</a>
-        <div class="dropdown-divider"></div>
-    </div>
+    <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+    <form action="" method="get" action="{% url 'contrib-home' %}">
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Queries
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="latest" name="latest">Date (Latest)</button>
+                <button type="submit" class="dropdown-item" value="earliest" name="earliest">Date (Earliest)</button>
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="greatest" name="greatest">Amount (Greatest)</button>
+                <button type="submit" class="dropdown-item" value="smallest" name="smallest">Amount (Smallest)</button>
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="contribution" name="contribution">Contribution</button>
+                <button type="submit" class="dropdown-item" value="expense" name="expense">Expense</button>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+    </form>
 </div>
 <br><br>
 <table class="table table-hover table-dark">

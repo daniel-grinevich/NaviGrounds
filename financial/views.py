@@ -26,13 +26,32 @@ class PaymentListView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'financial/contrib_home.html'
     context_object_name = 'payments'
-    ordering = ['-time_posted']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.GET.get('latest'):
+            queryset = Payment.objects.order_by('time_posted')
+            return queryset
+        if self.request.GET.get('earliest'):
+            queryset = Payment.objects.order_by('-time_posted')
+            return queryset
+        if self.request.GET.get('greatest'):
+            queryset = Payment.objects.order_by('-amount')
+            return queryset
+        if self.request.GET.get('smallest'):
+            queryset = Payment.objects.order_by('amount')
+            return queryset
+        if self.request.GET.get('contribution'):
+            queryset = Payment.objects.filter(type__name='Contribution')
+            return queryset
+        if self.request.GET.get('expense'):
+            queryset = Payment.objects.filter(type__name='Expense')
+            return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = PaymentFilter(self.request.GET, queryset=self.get_queryset())
         return context
-
 
 class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Payment
@@ -65,8 +84,3 @@ class DeleteView(SuccessMessageMixin, DeleteView):
 
 class PaymentDetailView(DetailView):
     model = Payment
-    #template_name = 'financial/contrib_home/payment_detail.html'
-    #context_object_name = 'Payment'
-
-    #def get_object(self):
-        #return Payment.objects.get(pk=self.kwargs['pk'])
