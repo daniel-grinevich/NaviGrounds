@@ -11,7 +11,8 @@ from django.views.generic import (
         ListView,
         CreateView,
         DeleteView,
-        DetailView
+        DetailView,
+        UpdateView
 )
 from .models import Payment, Category
 from .filters import PaymentFilter
@@ -42,7 +43,7 @@ class PaymentListView(LoginRequiredMixin, ListView):
             queryset = Payment.objects.order_by('amount')
             return queryset
         if self.request.GET.get('contribution'):
-            queryset = Payment.objects.filter(type__name='Contribution')
+            queryset = Payment.objects.filter(type__name='Contribution').order_by('-time_posted')
             return queryset
         if self.request.GET.get('expense'):
             queryset = Payment.objects.filter(type__name='Expense')
@@ -84,3 +85,17 @@ class DeleteView(SuccessMessageMixin, DeleteView):
 
 class PaymentDetailView(DetailView):
     model = Payment
+
+class PaymentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Payment
+    fields = ['amount','type']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

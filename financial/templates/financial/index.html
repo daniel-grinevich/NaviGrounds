@@ -1,27 +1,32 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<br><br>
-<div class="row">
-    <div class="col-5">
-        <h1>NaviPort Admin</h1>
-        <h6>You must be logged in to access NaviPort info.</h6>
-        <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
-        <a class="btn btn-info" href="#" role="button">NaviPort admin</a>
-        <br><br>
-        <h1>Financials Home</h1>
-        <h6>You must be logged in to access contributions.</h6>
-        <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
-        <a class="btn btn-primary" href="{% url 'contrib-home' %}" role="button">Contribution page</a>
-    </div>
-    <div class="col-5">
-        <h1>Spam James App</h1>
-        <h6>You actually don't need to be logged in.</h6>
-        <a class="btn btn-info" href="#" role="button">Spam James</a>
-        <br><br>
-        <h1>Order Pizza!</h1>
-        <h6>You must be logged in to order pizza.</h6>
-        <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
-        <a class="btn btn-primary" href="#" role="button">Get some pizza!</a>
+<br>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Navi Grounds!</h1>
+    <p class="lead">You can do a lot here!</p>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-5">
+            <h3>NaviPort Admin</h3>
+            <h6>You must be logged in to access NaviPort info.</h6>
+            <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
+            <a class="btn btn-info" href="#" role="button">NaviPort admin</a>
+            <br><br>
+            <h3>Financials Home</h3>
+            <h6>You must be logged in to access contributions.</h6>
+            <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
+            <a class="btn btn-primary" href="{% url 'contrib-home' %}" role="button">Contribution page</a>
+        </div>
+        <div class="col-5">
+            <h3>Spam James App</h3>
+            <h6>You actually don't need to be logged in.</h6>
+            <a class="btn btn-info" href="#" role="button">Spam James</a>
+            <br><br>
+            <h3>Order Pizza!</h3>
+            <h6>You must be logged in to order pizza.</h6>
+            <a class="btn btn-dark" href="{% url 'login' %}" role="button">Log in</a>
+            <a class="btn btn-primary" href="#" role="button">Get some pizza!</a>
+        </div>
     </div>
 </div>
 {% endblock content %}
