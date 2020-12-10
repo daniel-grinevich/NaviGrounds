@@ -4,49 +4,49 @@
 <br>
 <div class="row">
     <div class="col-4">
-        <h1>Payments</h1>
-        <h6>Functions</h6>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Queries
-                </button>
-                <div class="dropdown-menu">
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Date (Oldest)</a>
-                    <a class="dropdown-item" href="#">Date (Earliest)</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Amount (Greatest)</a>
-                    <a class="dropdown-item" href="#">Amount (Smallest)</a>
-                    <div class="dropdown-divider"></div>
-                </div>
+        <h1>Payments Table</h1>
+        <div class="dropdown-divider"></div>
+    </div>
+</div>
+<div class="btn-group">
+    <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
+    <form action="" method="get" action="{% url 'contrib-home' %}">
+        <div class="btn-group">
+            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Queries
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="latest" name="latest">Date (Latest)</button>
+                <button type="submit" class="dropdown-item" value="earliest" name="earliest">Date (Earliest)</button>
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="greatest" name="greatest">Amount (Greatest)</button>
+                <button type="submit" class="dropdown-item" value="smallest" name="smallest">Amount (Smallest)</button>
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="dropdown-item" value="contribution" name="contribution">Contribution</button>
+                <button type="submit" class="dropdown-item" value="expense" name="expense">Expense</button>
+                <div class="dropdown-divider"></div>
             </div>
         </div>
-    </div>
-    <div class="col-3">
-        <form method="GET">
-            {{ filter.form|crispy }}
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
- </div>
-<br>
-<br>
+    </form>
+</div>
+<br><br>
 <table class="table table-hover table-dark">
   <thead>
     <tr>
       <!--<th scope="col">#</th>-->
-      <th scope="col">Hex</th>
+      <th scope="col">Hex UUIDField</th>
       <th scope="col">Username</th>
       <th scope="col">DateTimeField</th>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
-      <th scope="col">Type</th>
       <th scope="col">Amount</th>
+      <th scope="col">Type</th>
       <th scope="col"></th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+          Filter
+      </button></th>
     </tr>
   </thead>
   <tbody>
@@ -55,13 +55,21 @@
       <!--<th scope="row">{{ forloop.counter }}</th>-->
       <th scope="row">{{ payment.id }}</th>
       <td>{{ payment.author }}</td>
-      <td>{{ payment.time_posted }}</td>
+      <td>{{ payment.time_posted | date:"M d Y" }}</td>
       <td>{{ payment.author.first_name }}</td>
       <td>{{ payment.author.last_name }}</td>
-      <td>TYPE</td>
       <td>${{ payment.amount }}</td>
-      <td><a class="btn btn-secondary">View</a></td>
-      <td><a class="btn btn-primary">Edit</a></td>
+      <td>{{ payment.type.all|join:"" }}</td>
+      <td>
+          <a class="btn btn-light" href="{% url 'payment-detail' pk=payment.pk %}">
+              View
+          </a>
+      </td>
+      <td>
+          <a class="btn btn-light" href="{% url 'payment-update' pk=payment.pk %}">
+              Edit
+          </a>
+      </td>
       <td>
           <form action="{% url 'delete-view' pk=payment.pk %}" method="POST">
               {% csrf_token %}
@@ -78,18 +86,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Search Payment table</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="GET">
       <div class="modal-body">
-        ...
+              {{ filter.form|crispy }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
