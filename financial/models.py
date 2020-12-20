@@ -19,6 +19,7 @@ class Payment(models.Model):
     type = models.ManyToManyField(Category)
     time_posted = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
         return f'{self.id} Contribution'
 
