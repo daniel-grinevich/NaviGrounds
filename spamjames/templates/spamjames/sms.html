@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Spam James!</h1>
+    <p class="lead">Literally spam him as much as you like</p>
+    <hr class="my-4">
+    <form method="POST" name="SpamJamesForm">
+        {% csrf_token %}
+        <input id="sms" type="text" name="sms" maxlength="200"></input>
+        <div class="form-group">
+            <br>
+            <button class="btn btn-info" type="submit">Send to James</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

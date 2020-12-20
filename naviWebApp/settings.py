@@ -35,8 +35,10 @@ ALLOWED_HOSTS = ['104.200.30.246', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'twilio.rest',
     'django_filters',
     'bootstrap_modal_forms',
+    'spamjames.apps.SpamjamesConfig',
     'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
