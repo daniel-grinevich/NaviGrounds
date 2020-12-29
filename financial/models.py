@@ -10,6 +10,11 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+class Status(models.Model):
+    type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.type}'
 
 class Payment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -18,7 +23,8 @@ class Payment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     type = models.ManyToManyField(Category)
     time_posted = models.DateTimeField(auto_now_add=True)
-
+    description = models.TextField(null=True)
+    status = models.ManyToManyField(Status)
 
     def __str__(self):
         return f'{self.id} Contribution'
