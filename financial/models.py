@@ -14,7 +14,7 @@ class Category(models.Model):
 class Payment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     amount = models.IntegerField(default=0)
-    receipt_img = models.ImageField(upload_to='receipt_pics',null=True)
+    receipt_img = models.ImageField(default='default.jpg', upload_to='receipt_pics')
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     type = models.ManyToManyField(Category)
     time_posted = models.DateTimeField(auto_now_add=True)
