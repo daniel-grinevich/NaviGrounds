@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from .forms import SpamJamesForm
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from twilio.rest import Client
+from django.contrib import messages
+from .forms import SpamJamesForm
+
 # Create your views here.
 def sms(request):
     if request.method == 'POST':
@@ -13,5 +16,7 @@ def sms(request):
                                 from_="+18049132947",
                                 body=sms
                                     )
-            return render(request, 'spamjames/sms.html')
+            messages.success(request, f'MSG sent to James Ridgeway')
+            return redirect('sms')
+
     return render(request, 'spamjames/sms.html')

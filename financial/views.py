@@ -56,7 +56,7 @@ class PaymentListView(LoginRequiredMixin, ListView):
 
 class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Payment
-    fields = ['amount','type']
+    fields = ['amount','type','receipt_img']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
