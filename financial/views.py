@@ -56,7 +56,7 @@ class PaymentListView(LoginRequiredMixin, ListView):
 
 class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Payment
-    fields = ['amount','type','receipt_img']
+    fields = ['amount','type','receipt_img', 'description','status']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -70,7 +70,7 @@ class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class DeleteView(SuccessMessageMixin, DeleteView):
     model = Payment
-    success_url = '/financial/contrib_home'
+    success_url = '/financial/contrib_home/'
 
     def delete(self,request, *args, **kwargs):
         messages.success(
