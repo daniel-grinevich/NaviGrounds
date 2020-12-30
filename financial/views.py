@@ -70,7 +70,7 @@ class CreatePayment(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class DeleteView(SuccessMessageMixin, DeleteView):
     model = Payment
-    success_url = '/financial/contrib_home'
+    success_url = '/financial/contrib_home/'
 
     def delete(self,request, *args, **kwargs):
         messages.success(
