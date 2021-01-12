@@ -83,12 +83,21 @@ class DeleteView(SuccessMessageMixin, DeleteView):
         #form = PaymentCreateForm()
         #return render(request, 'financial/payment_form.html', {'form': form})
 
+
 class PaymentDetailView(DetailView):
     model = Payment
 
+    def update(self, request, *args, **kwargs):
+        imessages.success(
+            self.request,
+            f'Successfully deleted payment'
+        )
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 class PaymentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Payment
-    fields = ['amount','type']
+    fields = ['amount','type','description']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
