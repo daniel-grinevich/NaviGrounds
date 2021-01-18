@@ -15,5 +15,6 @@ urlpatterns = [
     path('contrib_home/delete/(?P<pk>[0-9]+)$', DeleteView.as_view(), name='delete-view'),
     path('contrib_home/detail/<uuid:pk>', PaymentDetailView.as_view(), name='payment-detail'),
     path('contrib_home/<uuid:pk>/update/', PaymentUpdateView.as_view(), name='payment-update'),
-    path('contrib_home/new/', CreatePayment.as_view(), name='payment-create')
+    path('contrib_home/new/', CreatePayment.as_view(), name='payment-create'),
+    path(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.update_status, name='update-status')
 ]

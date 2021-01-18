@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import (
@@ -86,13 +86,17 @@ class DeleteView(SuccessMessageMixin, DeleteView):
 
 class PaymentDetailView(DetailView):
     model = Payment
+    template_name = 'financial/payment_detail.html'
 
-    def update(self, request, *args, **kwargs):
-        imessages.success(
-            self.request,
-            f'Successfully deleted payment'
-        )
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def update_status(request, operation, pk):
+    payment = Payment.objects.get(id=pk)
+    if operation == 'complete':
+        print("Many to many field print")
+        payment.status.first().type = 'complete'
+        payment.save()
+        return redirect('payment-detail', pk=pk)
+    return redirect('payment-detail', pk=pk)
 
 
 class PaymentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
