@@ -43,9 +43,9 @@
         <hr>
         <h3>Current Status:</h3>
         <h6>{{ object.status.all|join:"" }}</h6>
-        <form method="GET">
-            <button type="submit" class="btn btn-primary" value="complete" name="complete">Complete</button>
-        </form>
+        <a href="{% url 'update-status' operation='complete' pk=object.id %}">
+            <button type="button" class="btn btn-primary">Complete</button>
+        </a>
         <hr>
         <h3>Export to PDF</h3>
         <button class="btn btn-primary">Export</button>
