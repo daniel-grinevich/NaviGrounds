@@ -92,9 +92,9 @@ class PaymentDetailView(DetailView):
 def update_status(request, operation, pk):
     payment = Payment.objects.get(id=pk)
     if operation == 'complete':
-        print("Many to many field print")
-        payment.status.first().type = 'complete'
-        payment.save()
+        status = payment.status.first()
+        status.type = 'incomplete'
+        status.save()
         return redirect('payment-detail', pk=pk)
     return redirect('payment-detail', pk=pk)
 
