@@ -4,12 +4,14 @@ from .views import (
     CreatePayment,
     DeleteView,
     PaymentDetailView,
-    PaymentUpdateView
+    PaymentUpdateView,
+    InvoiceListView
 )
 from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('invoice/', InvoiceListView.as_view(), name='invoice'),
     path('contrib_home/', PaymentListView.as_view(), name='contrib-home'),
     #path('contrib_home/', views.contrib_home, name='contrib_home'),
     path('contrib_home/delete/(?P<pk>[0-9]+)$', DeleteView.as_view(), name='delete-view'),

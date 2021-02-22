@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from twilio.rest import Client
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
@@ -21,6 +22,37 @@ from .filters import PaymentFilter
 # Create your views here
 def index(request):
     return render(request, 'financial/index.html')
+
+class InvoiceListView(LoginRequiredMixin, ListView):
+    model = Payment
+    template_name = 'financial/invoice.html'
+    context_object_name = 'payments'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.GET.get('latest'):
+            queryset = Payment.objects.order_by('time_posted')
+            return queryset
+        if self.request.GET.get('earliest'):
+            queryset = Payment.objects.order_by('-time_posted')
+            return queryset
+        if self.request.GET.get('greatest'):
+            queryset = Payment.objects.order_by('-amount')
+            return queryset
+        if self.request.GET.get('smallest'):
+            queryset = Payment.objects.order_by('amount')
+            return queryset
+        if self.request.GET.get('contribution'):
+            queryset = Payment.objects.filter(type__name='Contribution').order_by('-time_posted')
+            return queryset
+        if self.request.GET.get('expense'):
+            queryset = Payment.objects.filter(type__name='Expense')
+            return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PaymentFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 class PaymentListView(LoginRequiredMixin, ListView):
 
@@ -92,16 +124,15 @@ class PaymentDetailView(DetailView):
 def update_status(request, operation, pk):
     payment = Payment.objects.get(id=pk)
     if operation == 'complete':
-        status = payment.status.first()
-        status.type = 'incomplete'
-        status.save()
+        payment.status = 'COMPLETE'
+        payment.save()
         return redirect('payment-detail', pk=pk)
     return redirect('payment-detail', pk=pk)
 
 
 class PaymentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Payment
-    fields = ['amount','type','description']
+    fields = ['amount','type','description','status']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

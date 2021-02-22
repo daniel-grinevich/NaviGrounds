@@ -4,7 +4,7 @@
 <br>
 <div class="row">
     <div class="col-4">
-        <h1>Payments Table</h1>
+        <h1>Invoice Table</h1>
         <div class="dropdown-divider"></div>
     </div>
 </div>
@@ -22,14 +22,10 @@
                 <div class="dropdown-divider"></div>
                 <button type="submit" class="dropdown-item" value="greatest" name="greatest">Amount (Greatest)</button>
                 <button type="submit" class="dropdown-item" value="smallest" name="smallest">Amount (Smallest)</button>
-                <div class="dropdown-divider"></div>
-                <button type="submit" class="dropdown-item" value="contribution" name="contribution">Contribution</button>
-                <button type="submit" class="dropdown-item" value="expense" name="expense">Expense</button>
-                <div class="dropdown-divider"></div>
             </div>
         </div>
     </form>
-    <a type="btn" class="btn btn-primary" href="{% url 'invoice' %}">Invoices</a>
+    <a type="btn" class="btn btn-primary" href="{% url 'contrib-home' %}">Payments</a>
 </div>
 <br><br>
 <table class="table table-hover">
@@ -41,7 +37,7 @@
       <th scope="col">Username</th>
       <th scope="col">DateTimeField</th>
       <th scope="col">Amount</th>
-      <th scope="col">Type</th>
+      <th scope="col">Description</th>
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
@@ -51,7 +47,7 @@
   </thead>
   <tbody>
     {% for payment in filter.qs %}
-    {% if payment.type != "Invoice" %}
+    {% if payment.type == "Invoice" %}
     <tr>
       <!--<th scope="row">{{ forloop.counter }}</th>-->
       <th scope="row">{{ payment.id }}</th>
@@ -68,7 +64,7 @@
       <td>{{ payment.author }}</td>
       <td>{{ payment.time_posted | date:"M d Y" }}</td>
       <td>${{ payment.amount }}</td>
-      <td>{{ payment.type }}</td>
+      <td>{{ payment.description }}</td>
       <td>
           <a class="btn btn-light" href="{% url 'payment-detail' pk=payment.pk %}">
               View
