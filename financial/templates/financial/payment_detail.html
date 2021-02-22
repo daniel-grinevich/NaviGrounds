@@ -42,7 +42,7 @@
         <p>{{ object.description }}</p>
         <hr>
         <h3>Current Status:</h3>
-        <h6>{{ object.status.all|join:"" }}</h6>
+        <h6>{{ object.status }}</h6>
         <a href="{% url 'update-status' operation='complete' pk=object.id %}">
             <button type="button" class="btn btn-primary">Complete</button>
         </a>

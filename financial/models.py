@@ -21,10 +21,24 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=14, decimal_places=2)
     receipt_img = models.FileField(default='default.jpg', upload_to='receipt_pics')
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    type = models.ManyToManyField(Category)
+    TYPE_CHOICES = (
+        ("Contribution", "Contribution"),
+        ("Personal Expense","Personal Expense"),
+        ("Company Expense", "Company Expense"),
+        ("Invoice", "Invoice")
+    )
+    type = models.CharField(max_length=22,
+                  choices=TYPE_CHOICES,
+                  default="Contribution")
     time_posted = models.DateTimeField(auto_now_add=True)
     description = models.TextField(null=True)
-    status = models.ManyToManyField(Status)
+    STATUS_CHOICES = (
+        ("COMPLETE", "Complete"),
+        ("INCOMPLETE","Incomplete")
+    )
+    status = models.CharField(max_length=10,
+                  choices=STATUS_CHOICES,
+                  default="INCOMPLETE")
 
     def __str__(self):
         return f'{self.id} Contribution'
