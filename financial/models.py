@@ -16,6 +16,11 @@ class Status(models.Model):
     def __str__(self):
         return f'{self.type}'
 
+class Connector(models.Model):
+    payment_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    invoice_id = models.UUIDField(default=uuid.uuid4, editable=False)
+
+
 class Payment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     amount = models.DecimalField(max_digits=14, decimal_places=2)
@@ -34,7 +39,8 @@ class Payment(models.Model):
     description = models.TextField(null=True)
     STATUS_CHOICES = (
         ("COMPLETE", "Complete"),
-        ("INCOMPLETE","Incomplete")
+        ("INCOMPLETE","Incomplete"),
+        ("TRANSIT","Transit")
     )
     status = models.CharField(max_length=10,
                   choices=STATUS_CHOICES,
