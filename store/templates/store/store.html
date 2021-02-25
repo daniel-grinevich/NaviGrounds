@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    .box-element{
+        box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .thumbnail{
+        width: 100%;
+        height: 200px;
+        align-items: center;
+    }
+</style>
+<br>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="box-element product">
+            <img class="thumbnail" style="" src="https://navi-bucket-s3.s3.amazonaws.com/default.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT664KXAFVYA62JP4%2F20210224%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210224T201059Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=23ee6327043d9e54372b0479db3549e6deb94b80e24eb8b0e9d5912049415cc1">
+            <br><br>
+            <h6><strong>Black Coffee</strong></h6>
+            <hr>
+            <button class="btn btn-dark">Start Order</button>
+            <h4 style="display: inline-block;float: right;">$2.00</h4>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="box-element product">
+            <img class="thumbnail" src="https://navi-bucket-s3.s3.amazonaws.com/default.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT664KXAFVYA62JP4%2F20210224%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210224T201059Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=23ee6327043d9e54372b0479db3549e6deb94b80e24eb8b0e9d5912049415cc1">
+            <br><br>
+            <h6><strong>Latte</strong></h6>
+            <hr>
+            <button class="btn btn-dark">Start Order</button>
+            <h4 style="display: inline-block;float: right;">$3.75</h4>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div  class="box-element product">
+            <img class="thumbnail" src="https://navi-bucket-s3.s3.amazonaws.com/default.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT664KXAFVYA62JP4%2F20210224%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210224T201059Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=23ee6327043d9e54372b0479db3549e6deb94b80e24eb8b0e9d5912049415cc1">
+            <br><br>
+            <h6><strong>Cappucino</strong></h6>
+            <hr>
+            <button class="btn btn-dark">Start Order</button>
+            <h4 style="display: inline-block;float: right;">$4.00</h4>
+        </div>
+    </div>
+
+{% endblock content %}

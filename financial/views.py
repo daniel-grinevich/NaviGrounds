@@ -15,7 +15,7 @@ from django.views.generic import (
         DetailView,
         UpdateView
 )
-from .models import Payment, Category
+from .models import Payment, Category, Connector
 from .filters import PaymentFilter
 
 
@@ -125,6 +125,7 @@ def update_status(request, operation, pk):
     payment = Payment.objects.get(id=pk)
     if operation == 'complete':
         payment.status = 'COMPLETE'
+        payment.type = 'Company Expense'
         payment.save()
         return redirect('payment-detail', pk=pk)
     return redirect('payment-detail', pk=pk)

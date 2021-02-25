@@ -1,0 +1,79 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% load django_bootstrap_icons %}
+{% include_bootstrap_icons %}
+<style>
+    .box-element{
+        box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .cart-row{
+        display: flex;
+        align-items: flex-stretch;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ece
+    }
+    .row-image{
+        width 100px;
+        height: 100px;
+    }
+    .quantity{
+        display: inline-block;
+        font-weight: 700;
+        padding-right:10px;
+    }
+    .chg-quantity{
+        width: 12px;
+        cursor: pointer;
+        display: block;
+    }
+</style>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="">Continue Shopping</a>
+
+            <br>
+            <br>
+
+            <table class="table">
+                <tr>
+                    <th><h5>Items: <strong>3</strong></h5></th>
+                    <th><h5>Total: <strong>$12</strong></h5></th>
+                    <th>
+                        <a class="btn btn-dark" style="float:right; margin:5px" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="box-element">
+            <div class="cart-row">
+                <div style="flex:2"></div>
+                <div style="flex:2"><strong>Item</strong></div>
+                <div style="flex:1"><strong>Price</strong></div>
+                <div style="flex:1"><strong>Quantity</strong></div>
+                <div style="flex:1"><strong>Total</strong></div>
+            </div>
+            <div class="cart-row">
+                <div style="flex:2"><img class=row-image src="https://navi-bucket-s3.s3.amazonaws.com/default.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT664KXAFVYA62JP4%2F20210224%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210224T201059Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=23ee6327043d9e54372b0479db3549e6deb94b80e24eb8b0e9d5912049415cc1"></div>
+                <div style="flex:2">Product 1 </div>
+                <div style="flex:1">$4.35</div>
+                <div style="flex:1">
+                    <p class="quantity"></p>
+                    <div class="quantity">
+                        <h6 class="chg-quantity">{% bs_icon 'arrow-up-square' %}</h6>
+                        <h6 class="chg-quantity">{% bs_icon 'arrow-down-square' %}</h6>
+                    </div>
+                </div>
+
+                <div style="flex:1">$32</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

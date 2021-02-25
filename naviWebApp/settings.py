@@ -35,13 +35,15 @@ ALLOWED_HOSTS = ['www.navigrounds.com', 'navigrounds.com','104.200.30.246', '127
 # Application definition
 
 INSTALLED_APPS = [
-    'twilio.rest',
-    'django_filters',
-    'bootstrap_modal_forms',
+    'store.apps.StoreConfig',
     'spamjames.apps.SpamjamesConfig',
     'financial.apps.FinancialConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'django_bootstrap_icons',
+    'twilio.rest',
+    'django_filters',
+    'bootstrap_modal_forms',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
