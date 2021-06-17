@@ -1,17 +1,15 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% load django_bootstrap_icons %}
-{% include_bootstrap_icons %}
 <br>
 <div class="row">
     <div class="col-4">
-        <h1>{% bs_icon 'credit-card-2-front' %} Payments Table</h1>
+        <h1>Payments Table</h1>
         <div class="dropdown-divider"></div>
     </div>
 </div>
 <div class="btn-group">
-    <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">{% bs_icon 'plus-square-fill' %} Add Entry</a>
+    <a type="btn" class="btn btn-success" href="{% url 'payment-create' %}">Add Entry</a>
     <form action="" method="get" action="{% url 'contrib-home' %}">
         <div class="btn-group">
             <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

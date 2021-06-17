@@ -1,0 +1,18 @@
+{% extends "store/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section container">
+         <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset="form-group">
+                <br>
+                <h3>New Product!</h3>
+                <hr>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
