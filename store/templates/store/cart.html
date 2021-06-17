@@ -1,7 +1,5 @@
 {% extends "store/main.html" %}
 {% block content %}
-{% load django_bootstrap_icons %}
-{% include_bootstrap_icons %}
 <style>
     .box-element{
         box-shadow:hsl(0, 0%, 80%) 0 0 16px;
@@ -35,7 +33,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="box-element">
-            <a class="btn btn-outline-dark" href="">Continue Shopping</a>
+            <a class="btn btn-outline-dark" href="{% url 'store' %}">Continue Shopping</a>
 
             <br>
             <br>
@@ -67,8 +65,8 @@
                 <div style="flex:1">
                     <p class="quantity">{{item.quantity}}</p>
                     <div class="quantity">
-                        <h6 data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart">{% bs_icon 'arrow-up-square' %}</h6>
-                        <h6 data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart">{% bs_icon 'arrow-down-square' %}</h6>
+                        <h6 data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart">ADD</h6>
+                        <h6 data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart">SUBTRACT</h6>
                     </div>
                 </div>
 

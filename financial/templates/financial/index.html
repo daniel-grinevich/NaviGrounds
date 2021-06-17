@@ -1,29 +1,67 @@
 {% extends "blog/base.html" %}
 {% block content %}
+<style>
+.box-element{
+    border: .5px solid #cfd8dc;
+    border-radius: 5px;
+    padding: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.box-element:hover{
+    padding: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+.text{
+    margin-left:30px;
+}
+.box-title{
+    color: #556CD6;
+}
+</style>
 <br>
-<div class="jumbotron">
-    <h1 class="display-4">Welcome to Navi Grounds!</h1>
-    <p class="lead">You can do a lot here . . . </p>
-    <hr class="my-4">
-    <div class="row">
-        <div class="col-5">
-            <h3>NaviPort Admin</h3>
-            <h6>You must be logged in to access NaviPort info.</h6>
-            <a class="btn btn-dark" href="#" role="button">NaviPort admin</a>
-            <br><br>
-            <h3>Financials Home</h3>
-            <h6>You must be logged in to access contributions.</h6>
-            <a class="btn btn-dark" href="{% url 'contrib-home' %}" role="button">Contribution page</a>
-        </div>
-        <div class="col-5">
-            <h3>Spam James App</h3>
-            <h6>You actually don't need to be logged in.</h6>
-            <a class="btn btn-dark" href="{% url 'sms' %}" role="button">Spam James</a>
-            <br><br>
-            <h3>Order Pizza!</h3>
-            <h6>You must be logged in to order pizza.</h6>
-            <a class="btn btn-dark" href="#" role="button">Get some pizza!</a>
-        </div>
+<div class="row">
+    <div class="col-5 box-element">
+        <h3 class="box-title">Admin App</h3>
+        <h6>You must be logged in to access NaviPort info.</h6>
+        <a class="btn btn-dark" href="#" role="button">NaviPort admin</a>
+    </div>
+    <div class="col-5 box-element">
+        <h3 class="box-title">Financials App</h3>
+        <h6>You must be logged in to access contributions.</h6>
+        <a class="btn btn-dark" href="{% url 'contrib-home' %}" role="button">Contribution page</a>
+    </div>
+    <div class="col-5 box-element">
+        <h3 class="box-title">Spam James App</h3>
+        <h6>You actually don't need to be logged in.</h6>
+        <a class="btn btn-dark" href="{% url 'sms' %}" role="button">Spam James</a>
+    </div>
+    <div class="col-5 box-element">
+        <h3 class="box-title">NaviStore App</h3>
+        <h6>This is the client side store! Have fun shopping!</h6>
+        <a class="btn btn-dark" href="{% url 'store' %}" role="button">Shop Navi!</a>
     </div>
 </div>
+<hr>
+<h5 class="text"><strong>Make an object</strong></h5>
+<div class="row">
+    <div class="col-3 box-element">
+        <h3 class="box-title">Create a payment record</h3>
+        <h6>This will take you to create a financial record.</h6>
+        <a class="btn btn-dark" href="{% url 'payment-create'%}" role="button">Add record</a>
+    </div>
+    <div class="col-3 box-element">
+        <h3 class="box-title">Create a store item</h3>
+        <h6>Add someting to the Navi store app.</h6>
+        <a class="btn btn-dark" href="{% url 'product-add' %}" role="button">Add product</a>
+    </div>
+    <div class="col-3 box-element">
+        <h3 class="box-title">Not sure what this will be</h3>
+        <h6>Not sure but this is a filler for something later.</h6>
+        <a class="btn btn-dark" href="{% url 'sms' %}" role="button">Spam James</a>
+    </div>
+</div>
+<br><br>
 {% endblock content %}

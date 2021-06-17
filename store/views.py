@@ -5,6 +5,12 @@ import datetime
 
 from .models import *
 from .utils import cookieCart, cartData, guestOrder
+from django.views.generic import (
+        CreateView
+)
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin
+)
 
 
 # Create your views here.
@@ -15,6 +21,14 @@ def store(request):
     products = Product.objects.all()
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store/store.html', context)
+
+def customize(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        item = order.orderitem_set.last()
+    context = {'item':item}
+    return render(request, 'store/customize.html', context)
 
 def cart(request):
     data = cartData(request)
@@ -39,15 +53,15 @@ def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-
     print('Action:', action)
-    print('productId:', productId)
+    print('Product:', productId)
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    customizeItem, created = CustomizeItem.objects.get_or_create(order_item=orderItem)
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
@@ -55,6 +69,8 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
+    customizeItem.save()
+    print('CustomizeItem:',customizeItem)
 
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -68,7 +84,6 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
     else:
         customer, order = guestOrder(request, data)
 
@@ -90,3 +105,8 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment complete!', safe=False)
+
+class CreatePayment(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ['price','name','digital', 'p_image']
+    #amount = form.cleaned_data['amount']

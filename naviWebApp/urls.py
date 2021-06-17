@@ -46,7 +46,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('financial/', include('financial.urls')),
     path('spamjames/', include('spamjames.urls')),
-    path('store/', include('store.urls'))
+    path('store/', include('store.urls'), name='store')
 ]
 
 if settings.DEBUG:

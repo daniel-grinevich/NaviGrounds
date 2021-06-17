@@ -1,0 +1,282 @@
+{% extends "store/main.html" %}
+{% block content %}
+{% load static %}
+<style>
+    .box-element {
+        box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .tab-element {
+        border: .5px solid #cfd8dc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 10px;
+        margin-left: 0px;
+    }
+    .form-field {
+        width: 250px;
+        display: inline-block;
+        padding: 10px;
+    }
+    .cart-row {
+        display: flex;
+        align-items: flex-stretch;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ece
+    }
+    .row-image {
+        width 75px;
+        height: 75px;
+    }
+    .hidden {
+        opacity: 0%;
+    }
+</style>
+<br>
+<!-- List group -->
+<div class="tab-element">
+    <div style="flex:2;display: inline-block;"><img class=row-image src="{{item.product.p_image.url}}"></div>
+    <h4 style="display: inline-block;">{{item.product.name}}</h4>
+    <button id="remove-btn" data-product={{item.product.id}} data-action="remove" class="btn btn-dark chg-quantity update-cart">Remove Item</button>
+    <a id="return-btn" class="btn btn-dark hidden" href="{% url 'store' %}">Return</a>
+<br>
+<div class="row">
+    <div class="col-4">
+        <div class="list-group" id="profileList" role="tablist">
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#sweet-tooth" role="tab">Sweet Tooth</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#trendy" role="tab">Trendy</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#traditional" role="tab">The Traditional</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#barista" role="tab">Barista's Choice</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#build-your-own" role="tab">Build your own!</a>
+        </div>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="col-8">
+        <div class="tab-content">
+            <div class="tab-pane box-element" id="sweet-tooth" role="tabpanel">
+                <form id="form-sweet-tooth">
+                    <h4>The Sweet Tooth</h4>
+                    <hr>
+                    <p>
+                        *add sugar* *sip* not sweet enough *add more sugar* *sips*
+                        now thats more like it. This is for coffee lovers who crave
+                        that extra sweetness in their cup of joe!
+                    </p>
+                    <h6>Extra sweet</h6>
+                    <h6>Tasty</h6>
+                    <h6>Will make you say yum</h6>
+                    <hr>
+                    <div class="input-group">
+                        <span class="input-group-text">Anything specific you want!</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn btn-dark btn-block" type="submit" value="Pick me!">
+                </form>
+            </div>
+            <div class="tab-pane box-element" id="trendy" role="tabpanel">
+                <form id="form-trendy">
+                    <h4>Trendy</h4>
+                    <hr>
+                    <p>
+                        This is your modern day coffee drink. It still has all the rich
+                        flavors a traditional cup of coffee would but with a small twist.
+                        Think Starbucks but better.
+                    </p>
+                    <h6>Extra sweet</h6>
+                    <h6>Tasty</h6>
+                    <h6>ill make you say y(c)um</h6>
+                    <hr>
+                    <div class="input-group">
+                        <span class="input-group-text">Anything specific you want!</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn btn-dark btn-block" type="submit" value="I want this one!">
+                </form>
+            </div>
+            <div class="tab-pane box-element" id="traditional" role="tabpanel">
+                <form id="form-traditional">
+                    <h4>The Traditional</h4>
+                    <hr>
+                    <p>
+                        The way coffee is suppose to taste. The way the italians would
+                        have made it, and you get to order it here in DC. Rich and smooth
+                        esspresso pulls from a quality semi-esspresso machine.
+                    </p>
+                    <h6>Flow control esspresso</h6>
+                    <h6>Rich crema</h6>
+                    <h6>Delizioso</h6>
+                    <hr>
+                    <div class="input-group">
+                        <span class="input-group-text">Anything specific you want!</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn btn-dark btn-block" type="submit" value="Can't go wrong with me!">
+                </form>
+            </div>
+            <div class="tab-pane box-element" id="barista" role="tabpanel">
+                <form id="form-barista">
+                    <h4>The Barista's Choice</h4>
+                    <hr>
+                    <p>
+                        Basically, I have made so many different coffee recipes and
+                        have added my personal touch. Personally, I think this is the
+                        best option but I swear this is 100% unbiased opinion.
+                    </p>
+                    <h6>Barista approved</h6>
+                    <h6>I will probably talk about the recipe</h6>
+                    <h6>You will love it!</h6>
+                    <hr>
+                    <div class="input-group">
+                        <span class="input-group-text">Anything specific you want!</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr>
+                    <button class="btn btn-dark btn-block" id="Barista" href="{% url 'cart' %}" type="submit">Can't go wrong with me!</button>
+                </form>
+            </div>
+            <div class="tab-pane box-element" id="build-your-own" role="tabpanel">
+                <form id="form-build">
+                    <h4>Build your own!</h4>
+                    <hr>
+                    <p>
+                        The customers always right ... you know what you want, and we
+                        have the tools to make that for you. Let us know how we can help
+                        you get the best cup of coffee today!
+                    </p>
+                    <h6>How you like it</h6>
+                    <h6>I will probably talk about the recipe</h6>
+                    <h6>You will love it!</h6>
+                    <hr>
+                    <!-- Coffee Strength -->
+                    <span class="input-group-text" basic-addon3">Coffee Strength</span>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Light Roast</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Medium Roast</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Dark Roast</label>
+                    </div>
+                    <!-- Espresso Shots -->
+                    <span class="input-group-text" basic-addon3">Espresso shots</span>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">1 Shot</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">2 Shots</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">3 Shots</label>
+                    </div>
+                    <!-- MILK TYPE -->
+                    <span class="input-group-text" basic-addon3">Milk type</span>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Whole Milk</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Oatmilk</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Almond Milk</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">No milk</label>
+                    </div>
+                    <!-- A dash of something sweet -->
+                    <span class="input-group-text" basic-addon3">A splash of someting sweet</span>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Caramel Syrup</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Vanilla Syrup</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Mocha Syrup</label>
+                    </div>
+                    <hr>
+                    <div class="input-group">
+                        <span class="input-group-text">Anything specific you want!</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn btn-dark btn-block" type="submit" value="Can't go wrong with me!">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var remove_btn = document.getElementById('remove-btn')
+    remove_btn.addEventListener('click', function(e) {
+        e.preventDefault()
+        console.log('Button clicked')
+        document.getElementById('remove-btn').classList.add("hidden");
+        document.getElementById('return-btn').classList.remove("hidden");
+    })
+
+    var triggerTabList = [].slice.call(document.querySelectorAll('#myList a'))
+    triggerTabList.forEach(function(triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl)
+
+        triggerEl.addEventListener('click', function(event) {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
+</script>
+<script>
+    var form_sweet_tooth = document.getElementById('form-sweet-tooth')
+    var form_trendy = document.getElementById('form-trendy')
+    var form_traditional = document.getElementById('form-traditional')
+    var form_barista = document.getElementById('form-barista')
+    var form_build = document.getElementById('form-build')
+
+    form_sweet_tooth.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log('Form Submitted...Sweet Tooth')
+    })
+    form_trendy.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log('Form Submitted...Trendy')
+    })
+    form_traditional.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log('Form Submitted...Traditional')
+    })
+    form_barista.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log('Form Submitted...Barista')
+    })
+    form_build.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log('Form Submitted...Build your own')
+    })
+
+    function submitFormData() {
+        console.log('Submitting form custom data')
+    }
+</script>
+
+
+{% endblock content %}
