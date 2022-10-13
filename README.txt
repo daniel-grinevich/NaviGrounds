@@ -8,7 +8,7 @@
 ~NaviGrounds~ 
 This is all licensed and copyrighted by Navi Coffee LLC. 
 
-Enjoy your time here because NaviGrounds is a shit ton of work. 
+Enjoy your time here because NaviGrounds is a ton of work. 
 Also Kenny is very demanding. 
 
 Lukewarm regards, 
